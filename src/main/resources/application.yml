@@ -1,0 +1,31 @@
+spring:
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:${DATASOURCE_DBTYPE:mysql}://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/sc_admin?characterEncoding=UTF-8&useUnicode=true&useSSL=false&serverTimezone=GMT
+      username: ${DATASOURCE_USERNAME:root}
+      password: ${DATASOURCE_PASSWORD:root123}
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.demo.domain
+  configuration:
+      map-underscore-to-camel-case: true
+
+######### \u901A\u7528Mapper ##########
+# \u4E3B\u952E\u81EA\u589E\u56DE\u5199\u65B9\u6CD5,\u9ED8\u8BA4\u503CMYSQL,\u8BE6\u7EC6\u8BF4\u660E\u8BF7\u770B\u6587\u6863
+mapper:
+  # \u679A\u4E3E\u6309\u7B80\u5355\u7C7B\u578B\u5904\u7406
+  enum-as-simple-type: true
+  identity: MYSQL
+  # \u8BBE\u7F6E insert \u548C update \u4E2D\uFF0C\u662F\u5426\u5224\u65AD\u5B57\u7B26\u4E32\u7C7B\u578B!=''
+  not-empty: true
+  mappers: com.example.demo.common.CusMapper
+
+######### \u5206\u9875\u63D2\u4EF6 ##########
+pagehelper:
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql
+  helper-dialect: mysql
+
+
